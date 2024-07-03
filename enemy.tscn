@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://d14rttpgu7qwk"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_m5piu"]
+[ext_resource type="Texture2D" uid="uid://dgsbfj2iifmby" path="res://Screenshot 2024-07-02 055509.png" id="1_n2svb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ak"]
+size = Vector2(44.125, 59)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rvcfq"]
+radius = 105.773
+
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(3, 3)
+script = ExtResource("1_m5piu")
+
+[node name="Screenshot2024-07-02055509" type="Sprite2D" parent="."]
+position = Vector2(330, 232)
+texture = ExtResource("1_n2svb")
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(330.938, 230.5)
+shape = SubResource("RectangleShape2D_is7ak")
+
+[node name="player_distacne" type="Area2D" parent="."]
+position = Vector2(330, 231)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_distacne"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_rvcfq")
+
+[connection signal="body_entered" from="player_distacne" to="." method="_on_player_distacne_body_entered"]
+[connection signal="body_exited" from="player_distacne" to="." method="_on_player_distacne_body_exited"]
